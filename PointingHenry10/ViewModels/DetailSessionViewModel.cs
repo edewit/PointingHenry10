@@ -42,7 +42,7 @@ namespace PointingHenry10.ViewModels
                 });
         }
 
-        public Session SelectedSession { get; } = new Session {Users = new ObservableCollection<User>()};
+        public Session SelectedSession { get; } = new Session { Users = new ObservableCollection<User>() };
 
         public ICommand VoteOnClick
         {
@@ -65,7 +65,16 @@ namespace PointingHenry10.ViewModels
             }
         }
 
-        public bool IsAdmin => _loggedUser.Name.Equals(SelectedSession.CreatedBy.Name);
+       
+        public bool IsAdmin {
+            get
+            {
+                if (_loggedUser != null && _loggedUser.Name != null)
+                    return _loggedUser.Name.Equals(SelectedSession.CreatedBy.Name);
+                return false;
+            }
+            
+        }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode,
             IDictionary<string, object> suspensionState)
